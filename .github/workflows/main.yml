@@ -13,7 +13,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '16.13'
+          node-version: '18'
 
       - name: Install Dependencies
         run: npm install
@@ -28,7 +28,7 @@ jobs:
         run: sed -i 's@"/"@"/${{ github.event.repository.name }}/"@g' ./public/manifest.json && cat ./public/manifest.json
 
       - name: Vite Build
-        run: npm run build -- --base=${{ github.event.repository.name }}
+        run: npm run build -- --base=${{ github.event.repository.name }} --
 
       - name: Redirect 404 to Index for SPA
         run: cp dist/index.html dist/404.html
